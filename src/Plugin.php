@@ -7,7 +7,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * Class Plugin
  *
- * @package Detain\MyAdminPaypal
+ * @package Ganesh\MyAdminPayssion
  */
 class Plugin
 {
