@@ -29,9 +29,9 @@ class Plugin
 	public static function getHooks()
 	{
 		return [
-			'system.settings' => [__CLASS__, 'getSettings'],
-			//'ui.menu' => [__CLASS__, 'getMenu'],
-			'function.requirements' => [__CLASS__, 'getRequirements']
+			self::$module.'.load_processing' => [__CLASS__, 'loadProcessing'],
+			self::$module.'.settings' => [__CLASS__, 'getSettings'],
+			self::$module.'.deactivate' => [__CLASS__, 'getDeactivate']
 		];
 	}
 
@@ -53,10 +53,7 @@ class Plugin
 	 */
 	public static function getRequirements(GenericEvent $event)
 	{
-		/**
-		 * @var \MyAdmin\Plugins\Loader $this->loader
-		 */
 		$loader = $event->getSubject();
-		$loader->add_page_requirement('payssion_refund', '/../vendor/ganesh/myadmin-payssion-payments/src/admin/refund.php');
+		$loader->add_admin_page_requirement('payssion_refund', '/../vendor/ganesh/myadmin-payssion-payments/src/admin/payssion_refund.php');
 	}
 }
