@@ -147,5 +147,8 @@ function payssion_refund()
 	if ($failed) {
 		$smarty->assign('failed', $failed);
 	}
+	if ($success) {
+		$smarty->assign('success', $success);	
+	}
 	add_output($smarty->fetch('billing/payssion/refund.tpl'));
 }
