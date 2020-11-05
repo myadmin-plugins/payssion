@@ -127,7 +127,7 @@ function payssion_refund()
 								'history_creator' => $GLOBALS['tf']->session->account_id,
 								'history_owner' => $pInvRows[$vars]['invoices_custid'],
 								'history_section' => 'payssion_refund',
-								'history_type' => $transact_ID,
+								'history_type' => $response['refund']['transaction_id'],
 								'history_new_value' => "Refunded {$amount}",
 								'history_old_value' => "Invoice Amount {$pInvRows[$vars]['invoices_amount']}"
 							]), __LINE__, __FILE__);
@@ -144,11 +144,11 @@ function payssion_refund()
 			$continue = false;
 		}
 	}
-	if ($failed) {
+	if (isset($failed)) {
 		$smarty->assign('failed', $failed);
 	}
-	if ($success) {
-		$smarty->assign('success', $success);	
+	if (isset($success)) {
+		$smarty->assign('success', $success);
 	}
 	add_output($smarty->fetch('billing/payssion/refund.tpl'));
 }
