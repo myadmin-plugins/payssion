@@ -144,10 +144,10 @@ function payssion_refund()
 			$continue = false;
 		}
 	}
-	if (isset($failed)) {
+	if (isset($failed) && $failed) {
 		$smarty->assign('failed', $failed);
 	}
-	if (isset($success)) {
+	if (isset($success) && $success) {
 		$smarty->assign('success', $success);
 	}
 	add_output($smarty->fetch('billing/payssion/refund.tpl'));
