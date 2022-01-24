@@ -60,14 +60,16 @@ function payssion_refund()
 				if (isset($GLOBALS['tf']->variables->request['paymentInv']) && !empty($GLOBALS['tf']->variables->request['paymentInv'])) {
 					myadmin_log('admin', 'info', 'Going with Payssion Refund', __LINE__, __FILE__);
 					$requestVars = $GLOBALS['tf']->variables->request;
+					$requestData = [
+						'amount' => $requestVars['refund_amount'],
+						'currency' => $payment_trans['currency'],
+						'transaction_id' => $payment_trans['transaction_id']
+					];
+					myadmin_log('admin', 'info', 'Payssion Refund Request: '.json_encode($requestData), __LINE__, __FILE__);
 					$payssion = new PayssionClient(true);
 					$response = null;
 					try {
-						$response = $payssion->refund([
-								'amount' => $requestVars['refund_amount'],
-								'currency' => $payment_trans['currency'],
-								'transaction_id' => $payment_trans['transaction_id']
-						]);
+						$response = $payssion->refund($requestData);
 					} catch (Exception $e) {
 						$msg = $e->getMessage();
 						$failed .= '<div>Something went wrong! '.$msg.'</div>';
